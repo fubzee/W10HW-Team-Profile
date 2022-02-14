@@ -1,0 +1,20 @@
+{
+  "name": "w10hw-team-profile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "inquirer": "^8.2.0",
+    "jsdom": "^19.0.0"
+  }
+}
