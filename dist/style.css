@@ -4,7 +4,7 @@
 }
 Body {
     font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1;
   }
 
@@ -20,18 +20,15 @@ Body {
     text-align: center;
   }
 
-  i {
-    padding : 5%;
+  .i {
+    padding : 25%;
+
   }
 
-  .employee{
-  
-    /*box-shadow: gray;*/
-    border-radius: 10%;
-  }
 .resultContainer{
 
   background-color: white;
+  border-radius: 10%;
 }
   .banner_blue {
       background-color: cornflowerblue;
@@ -49,28 +46,34 @@ Body {
   .banner_field{
       color: #ffffff;
       padding: 5%;
+      text-align: center;
     
   }
+#empRole{
 
-  .content {
-    background-color: white;
-    background-color: white;
-  }
+ 
+  font-size: 16px
+}
 
-  .content_field{
-    width: auto;
-    max-height: 150px;
-    border: 3px solid ;
-    border-color: white;
-    background-color: white;
-    padding: 2%;
-    
-  }
+.content {
+  background-color: white;
+  background-color: white;
+}
 
-  .footer {
-    background-color: cornflowerblue;
-    color: cornflowerblue;
-  }
+.content_field{
+  width: auto;
+  max-height: 150px;
+  border: 3px solid ;
+  border-color: white;
+  background-color: white;
+  padding: 2%;
+  
+}
+
+.footer {
+  background-color: cornflowerblue;
+  color: cornflowerblue;
+}
   
   
   

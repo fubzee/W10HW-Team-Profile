@@ -1,13 +1,9 @@
 const inquirer = require(`inquirer`);
 const fs = require('fs');
-var jsdom = require("jsdom");
-var JSDOM = jsdom.JSDOM;
 
 const Intern = require(`./lib/Intern`);
 const Manager = require(`./lib/Manager`);
 const Engineer = require(`./lib/Engineer`);
-const { isObject, supportedPropertyNames } = require('jsdom/lib/jsdom/living/generated/utils');
-const internal = require('stream');
 
 var employees = [];
 var empName = ``;
@@ -15,7 +11,6 @@ var empId = ``
 var empEmail = ``;
 var empDetail = ``;
 var empRole = ``;
-var employeepart = `;`
 
 const promptUser = () => 
 {      
@@ -175,7 +170,7 @@ function createHTML (employees){
 function generatedHTML(employees) 
 {
         //  Setting up the header and meta data
-        console.log ('received data',employees);
+        
         fs.writeFile(`./dist/index.html`, `<!DOCTYPE html>`, (err) =>
         err ? console.error(err) : console.log('Success!'));
         fs.appendFileSync(`./dist/index.html`, `<html lang="en"`, (err) =>
@@ -219,22 +214,23 @@ function generatedHTML(employees)
         fs.appendFileSync(`./dist/index.html`, `<div class = "row" >`, (err) =>
         err ? console.error(err) : console.log('Success!'));
 
-        for ( i=1; i <= employees.length; i++) 
+        for ( i=0; i < employees.length; i++) 
         {
-         console.log(i, employees.length);
+       
+         const employee = employees[i];
 
             fs.appendFileSync(`./dist/index.html`,`<div class="col-sm-3">`, (err) =>
             err ? console.error(err) : console.log('Success!'));
             fs.appendFileSync(`./dist/index.html`,` <div class = "resultContainer shadow-lg">`, (err) =>
             err ? console.error(err) : console.log('Success!'));
 
-            if (Object.Intern)
+            if (employee instanceof Intern)
 
             {
-                empName = Intern.empName;
-                empId = Intern.id;
-                empEmail = Intern.email;
-                empDetail = Intern.school;
+                empName = employee.empName;
+                empId = employee.id;
+                empEmail = employee.email;
+                empDetail = employee.school;
                 empRole = `Intern`;
                 fs.appendFileSync(`./dist/index.html`, `<div class = "banner_green" >`, (err) =>
                 err ? console.error(err) : console.log('Success!'));
@@ -243,12 +239,12 @@ function generatedHTML(employees)
             }
             else
             {
-                if (Object.Engineer)
+                if (employee instanceof Engineer)
                 {
-                    empName = Engineer.empName;
-                    empId = Engineer.id;
-                    empEmail = Engineer.email;
-                    empDetail = Engineer.gitHub;
+                    empName = employee.empName;
+                    empId = employee.id;
+                    empEmail = employee.email;
+                    empDetail = employee.gitHub;
                     empRole = `Engineer`;
                     fs.appendFileSync(`./dist/index.html`, `<div class = "banner_blue" i class="bi bi-robot">`, (err) =>
                     err ? console.error(err) : console.log('Success!'));
@@ -257,10 +253,10 @@ function generatedHTML(employees)
                 }
                 else
                 {
-                    empName = Manager.empName;;
-                    empId = Manager.id;
-                    empEmail = Manager.email;
-                    empDetail = Manager.OfficeNo;
+                    empName = employee.empName;
+                    empId = employee.id;
+                    empEmail = employee.email;
+                    empDetail = employee.officeNo;
                     empRole = `Manager`;
                     fs.appendFileSync(`./dist/index.html`, `<div class = "banner_purple">`, (err) =>
                     err ? console.error(err) : console.log('Success!'));
@@ -278,36 +274,33 @@ function generatedHTML(employees)
             err ? console.error(err) : console.log('Success!'));
             fs.appendFileSync(`./dist/index.html`,`<p id="empId" class = "content_field">${empId}</p>`, (err) =>
             err ? console.error(err) : console.log('Success!'));
-            fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-envelope"></i><a href=mailto:" ${empEmail}</a><p id="empEmail" class = "content_field"></p>`, (err) =>
+            fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-envelope"></i><a href="mailto: ${empEmail}">  ${empEmail}</a><p id="empEmail" class = "content_field"></p>`, (err) =>
             err ? console.error(err) : console.log('Success!'));
           
-            if (Object.Intern){
+            if (employee instanceof Intern){
 
-                fs.appendFileSync(`./dist/index.html`,`<p id="empDetail"class = "content_field">${empDetail}</p>`, (err) =>
+                fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-building"></i><p id="empDetail"class = "content_field" >${empDetail}</p>`, (err) =>
                 err ? console.error(err) : console.log('Success!'));  
             }
             else
             {
-                if (Object.Engineer){
-                    fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-github"></i><p id="empDetail" class = "content_field"><link href="${empDetail}"/></p>`, (err) =>
+                if (employee instanceof Engineer){
+                    fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-github"></i><a href="${empDetail}" target="_blank">  ${empDetail}</a/><p id="empDetail" class = "content_field"></p>`, (err) =>
                     err ? console.error(err) : console.log('Success!'));  
                 }
                 else{
-                    fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-telephone"></i><p id="empDetail"class = "content_field">${empDetail}</p>`, (err) =>
+                    fs.appendFileSync(`./dist/index.html`,`<i class="bi bi-telephone"></i><p id="empDetail"class = "content_field" >${empDetail}</p>`, (err) =>
                     err ? console.error(err) : console.log('Success!')); 
                 }
             }
 
-            // fs.appendFileSync(`./dist/index.html`,`<p id="empDetail"class = "content_field">${empDetail}</p>`, (err) =>
-            // err ? console.error(err) : console.log('Success!'));
             fs.appendFileSync(`./dist/index.html`,`</div>`, (err) =>
             err ? console.error(err) : console.log('Success!'));
             fs.appendFileSync(`./dist/index.html`,`</div>`, (err) =>
             err ? console.error(err) : console.log('Success!'));
             fs.appendFileSync(`./dist/index.html`,`</div>`, (err) =>
             err ? console.error(err) : console.log('Success!'));
-            // fs.appendFileSync(`./dist/index.html`,`</div>`, (err) =>
-            // err ? console.error(err) : console.log('Success!'));
+
         }
     // Footer 
         fs.appendFileSync(`./dist/index.html`,`</div>`, (err) =>
@@ -336,150 +329,3 @@ function generatedHTML(employees)
 } 
     
 init();   
-        
-        
-        
-        
-        
-   
-        
-
-
-
-
-
-//         `<!DOCTYPE html>
-//         <html lang="en">
-//         <head>
-//             <meta charset="UTF-8" />
-//             <meta name="viewport" content="width=device-width, initial-scale=1">
-//             <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-//             <link
-//             rel="stylesheet"
-//             href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            
-//             />
-//             <link
-//             rel="stylesheet"
-//             href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-//             integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-//             crossorigin="anonymous"
-//             />
-//             <link
-//             href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-//             rel="stylesheet"
-//             />
-//             <link rel="stylesheet" href="style.css" />
-//             <title>Team Profile</title>
-//         </head>
-//         <header class="jumbotron">
-//             <h1 attribute = "title" id = "title" class="display-3"> Team</h1>
-//         </header>
-//         <body>
-//         ${ employeepart }
-//         </body>
-//         </html>`;
-    
-
-
-//function createEmployeepart(employees) 
-
-//     employeepart = () => 
-//     {
- 
-//     console.log(`Gen HTML ` , employees)
-
-//     global.document = new JSDOM(generatedHTML).window.document;
-//     console.log ("HTML", employees.length, employees);
-    
-//     let newcontainerDiv = document.createElement(`div`);
-//     newcontainerDiv.className = `container`;
-    
-//     let newrowDiv = document.createElement(`div`);
-//     newrowDiv.className = `row col-xs-3`;
-//     newcontainerDiv.appendChild(newrowDiv);
-//     console.log(newcontainerDiv);
-//     for ( i=1; i <= employees.length; i++) 
-//       console.log(employees.length);
-//     {
-//         if (`Intern`)
-//         {
-//             empName = Intern.empName;
-//             empId = Intern.id;
-//             empEmail = Intern.email;
-//             empDetail = Intern.school;
-//             empRole = `Intern`;
-//         }
-//         else
-//         {
-//             if (`Engineer`)
-//             {
-//                 empName = Engineer.empName;
-//                 empId = Engineer.id;
-//                 empEmail = Engineer.email;
-//                 empDetail = Engineer.gitHub;;
-//                 empRole = `Engineer`;
-//             }
-//             else
-//             {
-//                 empName = Manager.empName;;
-//                 empId = Manager.id;
-//                 empEmail = Manager.email;
-//                 empDetail = Manager.OfficeNo;
-//                 empRole = `Manager`;
-//             }
-//         }
-//     }
-//         let newemployeeDiv = document.createElement(`div`)
-//         newemployeeDiv.id = `employee`;
-//         newemployeeDiv.className = 'container'
-//         newrowDiv.appendChild(newemployeeDiv);
-
-//         let newbannerDiv = document.createElement(`div`)
-//         newbannerDiv.id = `banner`;
-//         newbannerDiv.className = `banner row`;
-//         newbannerDiv.style.backgroundColor = '#06aed5';
-//         newemployeeDiv.appendChild(newbannerDiv);
-
-//         let newnameDiv = document.createElement(`div`)
-//         newnameDiv.id = `name`;
-//         newnameDiv.className = `banner_field`;
-//         newbannerDiv.append(newnameDiv);
-//         newnameDiv.innerHTML = empName;
-
-//         let newroleDiv = document.createElement(`div`)
-//         newroleDiv.id = `role`;
-//         newroleDiv.className = `banner_field`;
-//         newbannerDiv.append(newroleDiv);
-//         newroleDiv.innerHTML = empRole;
-
-//         let newcontentDiv = document.createElement(`div`)
-//         newcontentDiv.id = `content`;
-//         newcontentDiv.className = `content col`;
-//         newemployeeDiv.appendChild(newcontentDiv);
-
-//         let newidDiv = document.createElement(`div`)
-//         newidDiv.id = `ID`;
-//         newidDiv.className = `content_field`;
-//         newcontentDiv.appendChild(newidDiv);
-//         newidDiv.innerHtml = empId;
-
-//         let newemailDiv = document.createElement(`div`)
-//         newemailDiv.id = `email`
-//         newemailDiv.className = `content_field`;
-//         newcontentDiv.appendChild(newemailDiv);
-//         newemailDiv.innerHTML = empEmail;
-
-//         let newdetailDiv = document.createElement(`div`)
-//         newdetailDiv.id = `detail`;
-//         newdetailDiv.className = `content_field`;
-//         newcontentDiv.appendChild(newdetailDiv);
-//         newdetailDiv.innerHTML = empDetail;
-
-//         document.body.appendChild(newcontainerDiv);
-//         console.log("Return employee part");
-//         return new Promise((resolve) => resolve(document.body.innerHTML));
-//     }
-//     return employeepart();
-   
-// };
