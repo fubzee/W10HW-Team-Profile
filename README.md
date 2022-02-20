@@ -42,7 +42,7 @@ This project is not licensd.
 ## Usage
 ---
  The application makes use of the NPM inquirer packsge to generate the questions
- Please use this link to view a video on how to run the program -> https://watch.screencastify.com/v/tuqEc67miNO0tlRab6e3.
+ Please use this link to view a video on how to run the program -> https://watch.screencastify.com/v/BT0wgNo4GrovAhYK9wKq
 
 ## Contributing
 ---
@@ -53,7 +53,8 @@ This project is not licensd.
 
 ## Testing
 ---
-Testing scripts are included and can be found in the repositiry under the test folder.  Test are run using NPM jest
+Testing scripts that check the objects arecreatedas expected are included and can be found in the this git repository under the tests folder.  
+Test are run using NPM jest apckage.  See https://watch.screencastify.com/v/7Oub2w1iGDPNFAA8B9ic for a demo on how the test are run.
 
 ## GIT Profile :link:
 --- 
