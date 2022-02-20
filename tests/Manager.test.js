@@ -1,19 +1,18 @@
-const Manager = require("../Manager");
+const Manager = require("../lib/Manager.js");
 
 describe("Manager", () => {
     describe("Initialization", () => {
         it("should return an object containing an 'officeNo' property when called with the 'new' keyword", () => {
-        const obj = new Manager();
-        expect(officeNo in obj).toEqual(true);
-        });
-        it("should return an object containing a 'role' property when called with the 'new' keyword", () => {
-            const obj = new Manager();
-            expect(role in obj).toEqual(true);
+        const obj = new Manager(`David`,999,`Lec`,`dave@bootcamp.com`,`+61-1234567`);
+        expect(obj.officeNo).toEqual(`+61-1234567`);
         });
     });
-    describe("role", () => {
-        it("should return a value Manager in the role property", () => {
-        expect(role instanceof Manager).toEqual(Manager);
-        });
+
+    //getofficeNo
+    describe(`getOffice`, () => {
+        it (`should return the Manager's office no`, () => {
+            const obj = new Manager(`David`,999,`Lec`,`dave@bootcamp.com`,`+61-1234567`);
+            expect(obj.getofficeNo()).toEqual(`+61-1234567`);
+        })
     });
 });

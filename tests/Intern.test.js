@@ -1,19 +1,18 @@
-const Intern = require("../Intern");
+const Intern = require("../lib/Intern.js");
 
 describe("Intern", () => {
     describe("Initialization", () => {
-        it("should return an object containing a 'school' property when called with the 'new' keyword", () => {
-        const obj = new Intern();
-        expect(school in obj).toEqual(true);
+        it(`should return an object containing a school property when called with the new keyword`, () => {
+        const obj = new Intern(`Scott`,100,`TA`,`scott@bootcamp.com`,`My School Name`);
+        expect(obj.school).toEqual(`My School Name`);
         });
-        it("should return an object containing a 'role' property when called with the 'new' keyword", () => {
-            const obj = new Intern();
-            expect(role in obj).toEqual(true);
-        });
+        
     });
-    describe("role", () => {
-        it("should return a value Intern in the role property", () => {
-        expect(role instanceof Intern).toEqual(Intern);
+    // getSchool()
+    describe(`get School`, () => {
+        it(`should return a value Intern in the school property`, () => {
+            const obj = new Intern(`Scott`,100,`TA`,`scott@bootcamp.com`,`My School Name`);
+            expect(obj.getSchool()).toEqual(`My School Name`);
         });
     });
 }); 
